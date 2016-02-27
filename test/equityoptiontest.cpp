@@ -142,7 +142,7 @@ int main(int argc, char* argv[]){
 
         // Monte Carlo Method: MC (crude)
 	        
-	   Size timeSteps = 1;
+        Size timeSteps = 1;
         Size mcSeed = 42;
 	
         boost::shared_ptr<PricingEngine> mcengine1;

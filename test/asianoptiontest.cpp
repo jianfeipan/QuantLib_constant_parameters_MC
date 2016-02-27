@@ -105,7 +105,7 @@ int main(int argc, char* argv[]){
         boost::shared_ptr<StrikedTypePayoff> payoff(
                 new PlainVanillaPayoff(type, strike));
         // options
-        DiscreteAveragingAsianOption asianOption(Average::Arithmetic, 108, 3, dates1, payoff, europeanExercise);
+        DiscreteAveragingAsianOption asianOption(Average::Arithmetic, 0, 0, dates1, payoff, europeanExercise);
         std::cout << "asianoption created" << std::endl;
 
         // BlackScholes Merton Process platForward
@@ -115,28 +115,9 @@ int main(int argc, char* argv[]){
         // BlackScholes Merton Process forward curve
         boost::shared_ptr<BlackScholesMertonProcess> forwardbsmProcess(
                 new BlackScholesMertonProcess(underlyingH, fowardDividendTS, fowardTermStructure, fowardVolTS));
-
-        // Black-Scholes for European plat
-        
-        asianOption.setPricingEngine(boost::shared_ptr<PricingEngine>(
-                    new AnalyticEuropeanEngine(bsmProcess)));
+                
         clock_t t1,t2;  
         Real res;
-        /*
-        t1 = clock();
-        res = asianOption.NPV();     
-        t2 = clock();
-        std::cout << "Black-Scholes(plat curve) : " << res << " (" << (float)(t2-t1)/(double(CLOCKS_PER_SEC)*1000) << "ms)"<<std::endl;
-        
-        // Black-Scholes for European forward curve
-        asianOption.setPricingEngine(boost::shared_ptr<PricingEngine>(
-                    new AnalyticEuropeanEngine(forwardbsmProcess)));
-
-        t1 = clock();
-        res = asianOption.NPV();     
-        t2 = clock();
-        std::cout << "Black-Scholes(forward curve) : " << res << " (" << (float)(t2-t1)/(double(CLOCKS_PER_SEC)*1000) << "ms)"<<std::endl;
-        */
 
         // Monte Carlo Method: MC (crude)
 	        
